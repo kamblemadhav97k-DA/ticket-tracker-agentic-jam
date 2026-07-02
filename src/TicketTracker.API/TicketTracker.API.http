@@ -1,0 +1,6 @@
+@TicketTracker.API_HostAddress = http://localhost:5113
+
+GET {{TicketTracker.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
