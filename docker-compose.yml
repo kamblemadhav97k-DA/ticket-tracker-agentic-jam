@@ -9,6 +9,12 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       POSTGRES_DB: ${POSTGRES_DB:-tickettracker}
+    # Publish Postgres to the host so tools run outside the compose network
+    # (e.g. the app launched from Visual Studio) can connect at localhost:5432.
+    # The backend container still connects via Host=db on the internal network,
+    # so this mapping does not affect the Docker-only workflow.
+    ports:
+      - "${DB_PORT:-5432}:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
     healthcheck:
